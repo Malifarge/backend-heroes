@@ -28,4 +28,4 @@ const heroes = [
     }
 ]
 
-module.export = heroes
+module.exports = heroes
