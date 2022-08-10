@@ -23,7 +23,9 @@ app.post('/', verifyHeroe,  (req,res)=>{
 })
 
 app.put('/:slug/power',verifySlug, (req,res)=>{
-    req.heroe.power = req.body
+    req.body.forEach(power=>{
+        req.heroe.power.push(power)
+    })
     res.json(req.heroe.power)
 })
 
