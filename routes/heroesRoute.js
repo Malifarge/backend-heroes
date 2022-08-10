@@ -29,5 +29,9 @@ app.put('/:slug/power',verifySlug, (req,res)=>{
     res.json(req.heroe.power)
 })
 
+app.delete('/:slug',verifySlug, (req,res)=>{
+    heroes.splice(req.index, 1)
+    res.json(`${req.heroe.slug} effacé correctement`)
+})
 
 module.exports = app
