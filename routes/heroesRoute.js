@@ -4,6 +4,8 @@ const heroes = require('../heroes')
 const { verifySlug } = require('../middleware/slug')
 const { verifyHeroe } = require('../middleware/heroesExist')
 const { verifyPower } = require('../middleware/power')
+const { validHero } = require('../middleware/validHero')
+
 
 
 
@@ -19,7 +21,7 @@ app.get('/:slug/power',verifySlug, (req,res)=>{
     res.json(req.heroe.power)
 })
 
-app.post('/', verifyHeroe,  (req,res)=>{
+app.post('/', verifyHeroe,validHero,  (req,res)=>{
     heroes.push(req.heroe)
     res.json(req.heroe)
 })
@@ -40,6 +42,11 @@ app.delete('/:slug/power/:power',verifySlug,verifyPower, (req,res)=>{
     
     heroes[req.index].power.splice(req.Powindex, 1)
     res.json(`Le pouvoir ${req.power} de ${req.heroe.slug} est effacé correctement`)
+})
+
+app.put('/:slug', verifySlug, validHero, (req,res)=> {
+    heroes[req.index] = req.body
+    res.json(req.body)
 })
 
 
