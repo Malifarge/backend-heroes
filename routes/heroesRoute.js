@@ -22,4 +22,10 @@ app.post('/', verifyHeroe,  (req,res)=>{
     res.json(req.heroe)
 })
 
+app.put('/:slug/power',verifySlug, (req,res)=>{
+    req.heroe.power = req.body
+    res.json(req.heroe.power)
+})
+
+
 module.exports = app
