@@ -3,6 +3,8 @@ const app = express()
 const heroes = require('../heroes')
 const { verifySlug } = require('../middleware/slug')
 const { verifyHeroe } = require('../middleware/heroesExist')
+const { verifyPower } = require('../middleware/power')
+
 
 
 app.get('/', (req,res)=>{
@@ -33,5 +35,12 @@ app.delete('/:slug',verifySlug, (req,res)=>{
     heroes.splice(req.index, 1)
     res.json(`${req.heroe.slug} effacé correctement`)
 })
+
+app.delete('/:slug/power/:power',verifySlug,verifyPower, (req,res)=>{
+    
+    heroes[req.index].power.splice(req.Powindex, 1)
+    res.json(`Le pouvoir ${req.power} de ${req.heroe.slug} est effacé correctement`)
+})
+
 
 module.exports = app
